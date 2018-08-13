@@ -7,12 +7,21 @@ import {
   SafeAreaView
 } from 'react-native'
 
-function Header () {
+function Header ({children}) {
   return(
     <SafeAreaView>
       <View style={styles.container}>
-        <Image style={styles.logo} source={require('../../../assets/logo.png')}/>
+      <View style={styles.brand}>
+        <Image 
+          style={styles.logo} 
+          source={require('../../../assets/logo.png')}
+          fadeDuration={0}
+        />
         <Text style={styles.title}>Fetch Movies App</Text>
+      </View>
+      <View style={styles.iconView}>
+        {children}
+      </View>
       </View>
     </SafeAreaView>
   )
@@ -23,11 +32,12 @@ const styles = StyleSheet.create({
     height: 50,
     width: '100%',
     backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
     flexDirection: 'row',
     borderBottomWidth: 1,
-    borderBottomColor: '#efefef'
+    borderBottomColor: '#efefef',
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    justifyContent: 'space-between'
   },
   logo: {
     height: 40,
@@ -37,6 +47,18 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 15,
     fontWeight: 'bold'
+  },
+  brand: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row'
+  },
+  iconView: {
+    height: 30,
+    width: 30,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
 

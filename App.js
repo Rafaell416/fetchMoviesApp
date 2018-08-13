@@ -10,7 +10,9 @@ export default class App extends Component<Props> {
   render() {
     return (
       <Home>
-        <Header />
+        <Header>
+          <Text>🔥</Text>
+        </Header>
       </Home>
     )
   }
