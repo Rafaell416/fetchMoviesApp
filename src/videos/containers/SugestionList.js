@@ -5,8 +5,17 @@ import {
   FlatList,
   Text
 } from 'react-native'
+import SugestionListLayout from '../components/SugestionListLayout'
+import EmptyState from '../components/EmptyState'
+import Separator from '../components/Separator'
+import Sugestion from '../components/Sugestion'
 
 export default class SugestionList extends Component {
+
+  _renderEmptyState = () => <EmptyState text="No hay Elementos en la lista"/>
+
+  _renderSeparator = () => <Separator />
+
   render () {
     const list = [
       {
@@ -19,10 +28,14 @@ export default class SugestionList extends Component {
       }
     ]
     return (
-      <FlatList 
+    <SugestionListLayout title="Suggested Movies">
+      <FlatList
         data={list}
-        renderItem={({ item })=> <Text>{item.title}</Text>}
+        renderItem={({ item })=> <Sugestion item={item}/>}
+        ListEmptyComponent={this._renderEmptyState}
+        ItemSeparatorComponent={this._renderSeparator}
       />
+    </SugestionListLayout>
     )
   }
 }

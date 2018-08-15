@@ -12,8 +12,8 @@ function Header ({children}) {
     <SafeAreaView>
       <View style={styles.container}>
       <View style={styles.brand}>
-        <Image 
-          style={styles.logo} 
+        <Image
+          style={styles.logo}
           source={require('../../../assets/logo.png')}
           fadeDuration={0}
         />
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     marginRight: 5
   },
   title: {
-    fontSize: 15,
+    fontSize: 18,
     fontWeight: 'bold'
   },
   brand: {
