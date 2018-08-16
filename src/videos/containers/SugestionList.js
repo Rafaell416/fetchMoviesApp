@@ -16,24 +16,18 @@ export default class SugestionList extends Component {
 
   _renderSeparator = () => <Separator />
 
+  _keyExtractor = item => item.id.toString()
+
   render () {
-    const list = [
-      {
-        key: '1',
-        title: 'Avengers'
-      },
-      {
-        key: '2',
-        title: 'Spiderman'
-      }
-    ]
+    const { sugestions } = this.props
     return (
     <SugestionListLayout title="Suggested Movies">
       <FlatList
-        data={list}
-        renderItem={({ item })=> <Sugestion item={item}/>}
+        data={sugestions}
+        renderItem={({ item })=> <Sugestion {...item}/>}
         ListEmptyComponent={this._renderEmptyState}
         ItemSeparatorComponent={this._renderSeparator}
+        keyExtractor={this._keyExtractor}
       />
     </SugestionListLayout>
     )

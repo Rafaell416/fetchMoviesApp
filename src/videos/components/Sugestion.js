@@ -3,39 +3,38 @@ import {
   View,
   Text,
   StyleSheet,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native'
 
-function Sugestion (props) {
+function Sugestion ({title, year, rating, medium_cover_image, genres}) {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container}>
       <View style={styles.videoColumn}>
         <Image
-          source={require('../../../assets/mini.png')}
+          source={{uri: medium_cover_image}}
           style={styles.mini}
           fadeDuration={0}
         />
         <View style={styles.genre}>
-          <Text style={styles.genreText}>Acción</Text>
+          <Text style={styles.genreText}>{genres[0]}</Text>
         </View>
       </View>
       <View style={styles.textColumn}>
-        <Text style={styles.title}>Avengers</Text>
-        <Text style={styles.year}>2018</Text>
-        <Text style={styles.rating}>5 estrellas</Text>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.year}>{year}</Text>
+        <Text style={styles.rating}>{rating}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: 110,
     flexDirection: 'row',
   },
   videoColumn: {
     backgroundColor: 'white',
-    flex: 1,
     padding: 5
   },
   textColumn: {
@@ -45,8 +44,8 @@ const styles = StyleSheet.create({
     paddingBottom: 5
   },
   mini: {
-    height: 100,
-    width: 180,
+    height: 150,
+    width: 100,
     resizeMode: 'contain',
     // shadowOffset:{  width: 7,  height: 7,  },
     // shadowColor: 'black',
