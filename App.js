@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
 import {
-  Text
+  Text,
+  View
 } from 'react-native'
 
 import Home from './src/screens/containers/Home'
 import Header from './src/sections/components/Header'
 import SugestionList from './src/videos/containers/SugestionList'
 import CategoryList from './src/videos/containers/CategoryList'
+import Player from './src/player/containers/Player'
 
 import config from './src/config'
 import createClient from './src/client'
@@ -40,6 +42,7 @@ export default class App extends Component {
         <Header>
           <Text>🔥</Text>
         </Header>
+          <Player style={{flex: 1}}/>
         <CategoryList categories={categories}/>
         <SugestionList sugestions={sugestions}/>
       </Home>

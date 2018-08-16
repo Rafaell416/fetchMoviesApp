@@ -36,7 +36,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     color: 'white',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textShadowColor: 'rgba(0,0,0,.75)',
+    textShadowOffset: {
+      height: 2,
+      width: 2
+    },
+    textShadowRadius: 0
   },
   background: {
     width: '100%',
