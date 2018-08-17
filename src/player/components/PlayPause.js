@@ -10,6 +10,12 @@ function PlayPause ({ onPress, paused }) {
     <TouchableOpacity
       onPress={onPress}
       style={styles.container}
+      hitSlop={{
+        left: 5,
+        top: 5,
+        bottom: 5,
+        right: 5,
+      }}
     >
       {
         paused ? <Text style={styles.button}>PLAY</Text> : <Text style={styles.button}>PAUSE</Text>
