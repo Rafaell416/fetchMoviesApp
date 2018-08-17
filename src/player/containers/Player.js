@@ -5,18 +5,24 @@ import {
 } from 'react-native'
 import Video from 'react-native-video'
 import VideoLayout from '../components/VideoLayout'
+import ControlLayout from '../components/ControlLayout'
+import PlayPause from '../components/PlayPause'
 
 export default class Player extends Component {
   constructor(props){
     super(props)
     this.state = {
-      loading: true
+      loading: true,
+      paused: false
     }
   }
 
   _onBuffer = ({ isBuffering }) => this.setState({ loading: isBuffering })
 
+  _onPressPlayPause = () => this.setState({ paused: !this.state.paused })
+
   render () {
+    const { paused, loading } = this.state
     return (
       <VideoLayout
         video={
@@ -25,13 +31,19 @@ export default class Player extends Component {
             ref={(ref) => this.player = ref}
             resizeMode="contain"
             style={styles.video}
-            muted
+            //muted
             onBuffer={this._onBuffer}
+            paused={paused}
           />
         }
         style={this.props.style}
         loader={<ActivityIndicator color='black'/>}
-        loading={this.state.loading}
+        loading={loading}
+        controls={
+          <ControlLayout>
+            <PlayPause paused={paused} onPress={this._onPressPlayPause}/>
+          </ControlLayout>
+        }
       >
       </VideoLayout>
     )

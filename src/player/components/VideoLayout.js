@@ -5,13 +5,14 @@ import {
   StyleSheet
 } from 'react-native'
 
-function VideoLayout ({style, video, loader, loading}) {
+function VideoLayout ({style, video, loader, loading, controls}) {
   return (
     <View style={style}>
       {video}
       <View style={styles.overlay}>
         { loading && loader }
       </View>
+      {controls}
     </View>
   )
 }
