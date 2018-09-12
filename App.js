@@ -1,49 +1,51 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react'
-import {Platform, StyleSheet, Text, View} from 'react-native'
+import {
+  Text,
+  View
+} from 'react-native'
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-})
+import Home from './src/screens/containers/Home'
+import Header from './src/sections/components/Header'
+import SugestionList from './src/videos/containers/SugestionList'
+import CategoryList from './src/videos/containers/CategoryList'
+import Player from './src/player/containers/Player'
 
-type Props = {}
-export default class App extends Component<Props> {
+import config from './src/config'
+import createClient from './src/client'
+const client = createClient(config)
+
+export default class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      sugestions: [],
+      categories: []
+    }
+  }
+
+  componentWillMount () {
+    this._getData()
+  }
+
+  _getData = async () => {
+    const [ sugestions, categories ] = await Promise.all([
+      client.getSugestions(),
+      client.getMovies()
+    ])
+    this.setState({ sugestions, categories })
+  }
+
   render() {
+    const { sugestions, categories } = this.state
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
+      <Home>
+        <Header>
+          <Text>🔥</Text>
+        </Header>
+          <Player style={{flex: 1}}/>
+        <CategoryList categories={categories}/>
+        <SugestionList sugestions={sugestions}/>
+      </Home>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-})
